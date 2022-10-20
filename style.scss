@@ -1,0 +1,41 @@
+$c-primary: red;
+$c-secondary: blue;
+$c-tertiary: green;
+$b-size: 1px;
+$m-size: 1.5vw;
+
+@mixin card($color, $border-color, $font-size: 1rem) {
+    color: $color;
+    border: $b-size solid $border-color;
+    font-size: $font-size;
+    margin: calc($m-size / 2) auto;
+}
+
+div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @include card($c-tertiary, $c-primary, inherit);
+    h1 {
+        width: fit-content;
+        border-bottom: $b-size solid $c-secondary;
+    }
+    section {
+        display: flex;
+        margin: 0 $m-size;
+        article {
+            @include card($c-primary, $c-tertiary);
+            p {
+                text-align: center;
+                padding: calc($m-size / 2);
+            }
+            &:nth-of-type(odd) {
+                color: $c-secondary;
+            }
+        }
+        &:last-child article {
+            @include card($c-tertiary, $c-secondary, 24px);
+            margin-bottom: $m-size;
+        }
+    }
+}
